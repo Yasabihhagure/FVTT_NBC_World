@@ -1,0 +1,85 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
+            
+            <div class="resources grid grid-2col">
+                {{!-- Health --}}
+                <div class="resource flex-group-center">
+                    <label for="system.health.value" class="resource-label">HP</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                    <input type="number" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+                    <span> / </span>
+                    <input type="number" name="system.health.max" value="{{system.health.max}}" data-dtype="Number"/>
+                    </div>
+                </div>
+
+                {{!-- Morale (for NPC mainly, but displayed generally for now) --}}
+                {{#if (eq actor.type "npc")}}
+                <div class="resource flex-group-center">
+                    <label for="system.morale.value" class="resource-label">{{localize "NBCASTLE.Morale"}}</label>
+                    <div class="resource-content flexrow flex-center flex-between">
+                    <input type="number" name="system.morale.value" value="{{system.morale.value}}" data-dtype="Number"/>
+                    <span> / </span>
+                    <input type="number" name="system.morale.max" value="{{system.morale.max}}" data-dtype="Number"/>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">Description</a>
+        <a class="item" data-tab="attributes">Attributes</a>
+        <a class="item" data-tab="items">Items</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab description" data-group="primary" data-tab="description">
+            {{editor system.biography target="system.biography" rollup=false button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes" data-group="primary" data-tab="attributes">
+            <div class="flexcol">
+                {{#if (eq actor.type "character")}}
+                <div class="grid grid-4col">
+                    {{#each system.attributes as |attr key|}}
+                    <div class="ability flexrow flex-group-center">
+                        <label for="system.attributes.{{key}}.value" class="resource-label">{{localize attr.label}}</label>
+                        <input type="number" name="system.attributes.{{key}}.value" value="{{attr.value}}" data-dtype="Number"/>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="flexrow flex-group-center" style="margin-top: 10px;">
+                    <button type="button" class="auto-create">
+                        <i class="fas fa-dice"></i> {{localize "NBCASTLE.AutoCreate"}}
+                    </button>
+                </div>
+                
+                <hr>
+
+                <div class="flexrow flex-group-center">
+                  <label class="resource-label">Armor Level</label>
+                  <input type="number" name="system.armor.level" value="{{system.armor.level}}" data-dtype="Number"/>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+
+        {{!-- Items Tab --}}
+        <div class="tab items" data-group="primary" data-tab="items">
+             {{> "systems/nobunaga-black-castle/templates/actor/parts/actor-items.hbs"}}
+        </div>
+
+    </section>
+</form>

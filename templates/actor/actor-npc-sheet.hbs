@@ -1,0 +1,144 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+
+            <div class="resources grid grid-3col">
+                {{!-- Health --}}
+                <div class="resource flex-group-center">
+                    <label for="system.health.value" class="resource-label">HP</label>
+                    <div class="resource-content flexrow flex-center resource-inputs">
+                        <input type="number" name="system.health.value" value="{{system.health.value}}"
+                            data-dtype="Number" />
+                        <span class="sep"> / </span>
+                        <input type="number" name="system.health.max" value="{{system.health.max}}"
+                            data-dtype="Number" />
+                    </div>
+                </div>
+
+                {{!-- Morale --}}
+                <div class="resource flex-group-center">
+                    <label for="system.morale.value" class="resource-label">{{localize "NBCASTLE.Morale"}}</label>
+                    <div class="resource-content flexrow flex-center">
+                        <input type="text" name="system.morale.value" value="{{system.morale.value}}"
+                            data-dtype="String" placeholder="Value or Condition" />
+                        <a class="morale-check" title="{{localize 'NBCASTLE.MoraleCheck'}}"><i
+                                class="fas fa-dice"></i></a>
+                        <a class="group-morale-check" title="{{localize 'NBCASTLE.GroupMoraleCheck'}}"><i
+                                class="fas fa-users"></i></a>
+                    </div>
+                </div>
+
+                {{!-- Leader --}}
+                <div class="resource flex-group-center">
+                    <label for="system.attributes.leader" class="resource-label">{{localize "NBCASTLE.Leader"}}</label>
+                    <div class="resource-content flexrow flex-center">
+                        <input type="checkbox" name="system.attributes.leader" {{checked system.attributes.leader}} />
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Preset Selector (Only if editable) --}}
+            {{#if options.editable}}
+            <div class="form-group">
+                <label>{{localize "NBCASTLE.LoadPreset"}}:</label>
+                <div class="flexrow">
+                    <select class="npc-preset-select">
+                        <option value="">{{localize "NBCASTLE.SelectEnemy"}}</option>
+                        {{#each config.enemies as |enemy key|}}
+                        <option value="{{key}}">{{enemy.name}}</option>
+                        {{/each}}
+                    </select>
+                    <label class="flex-0" style="white-space: nowrap; margin: 0 5px;">{{localize
+                        "NBCASTLE.Count"}}:</label>
+                    <div class="flexrow" style="flex: 0 0 90px; align-items: center;">
+                        <a class="count-change" data-action="minus"><i class="fas fa-minus"></i></a>
+                        <input type="number" class="npc-create-count" value="1" min="1" max="10"
+                            style="text-align: center;" readonly />
+                        <a class="count-change" data-action="plus"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        <a class="item" data-tab="description">{{localize "NBCASTLE.Description"}}</a>
+        <a class="item" data-tab="attributes">{{localize "NBCASTLE.Attributes"}}</a>
+        <a class="item" data-tab="attacks">{{localize "NBCASTLE.Attacks"}}</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        <div class="tab description" data-group="primary" data-tab="description">
+            {{editor system.biography target="system.biography" rollup=false button=true owner=owner editable=editable}}
+        </div>
+
+        {{!-- Attributes Tab --}}
+        <div class="tab attributes" data-group="primary" data-tab="attributes">
+            <div class="flexcol">
+
+                {{!-- Armor Section --}}
+                <div class="form-group">
+                    <label>{{localize "NBCASTLE.ArmorLevel"}}</label>
+                    <input type="number" name="system.armor.level" value="{{system.armor.level}}" data-dtype="Number" />
+                </div>
+                <div class="form-group">
+                    <label>{{localize "NBCASTLE.Reduction"}} (e.g. -1d6)</label>
+                    <input type="text" name="system.armor.reduction" value="{{system.armor.reduction}}"
+                        data-dtype="String" />
+                </div>
+
+                <hr>
+
+                <hr>
+            </div>
+        </div>
+
+        {{!-- Attacks Tab --}}
+        <div class="tab attacks" data-group="primary" data-tab="attacks">
+            <div class="form-group">
+                <label>{{localize "NBCASTLE.CurrentCycleTurn"}}</label>
+                <div class="flexrow">
+                    <a class="cycle-change" data-action="prev"><i class="fas fa-angle-left"></i></a>
+                    <input type="number" name="system.cycle.current" value="{{system.cycle.current}}"
+                        data-dtype="Number" class="cycle-input" />
+                    <a class="cycle-change" data-action="next"><i class="fas fa-angle-right"></i></a>
+                </div>
+            </div>
+
+            <h3>{{localize "NBCASTLE.AttackCycle"}}</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{localize "NBCASTLE.Turn"}}</th>
+                        <th>{{localize "NBCASTLE.AttackName"}}</th>
+                        <th>{{localize "NBCASTLE.Damage"}}</th>
+                        <th>{{localize "NBCASTLE.Count"}}</th>
+                        <th>{{localize "NBCASTLE.Effect"}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each attacks as |attack|}}
+                    <tr class="{{#if attack.active}}active-cycle{{/if}}">
+                        <td>{{attack.turn}}</td>
+                        <td>{{attack.name}}</td>
+                        <td>{{attack.damage}}</td>
+                        <td>{{attack.count}}</td>
+                        <td>{{attack.effect}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</form>

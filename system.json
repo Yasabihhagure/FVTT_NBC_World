@@ -1,0 +1,45 @@
+{
+  "id": "nobunaga-black-castle",
+  "title": "信長の黒い城 (Nobunaga's Black Castle)",
+  "description": "Foundry VTT system for 'Nobunaga's Black Castle' TRPG.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "12"
+  },
+  "authors": [
+    {
+      "name": "Antigravity",
+      "email": "",
+      "url": "https://github.com/Yasabihhagure/fvtt-nobunaga-black-castle"
+    }
+  ],
+  "scripts": [],
+  "esmodules": [
+    "module/nobunaga-black-castle.mjs"
+  ],
+  "styles": [
+    "styles/nobunaga-black-castle.css"
+  ],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
+    }
+  ],
+  "template": "template.json",
+  "gridDistance": 1,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "morale",
+  "url": "https://github.com/Yasabihhagure/fvtt-nobunaga-black-castle",
+  "manifest": "https://raw.githubusercontent.com/Yasabihhagure/fvtt-nobunaga-black-castle/main/system.json",
+  "download": "https://github.com/Yasabihhagure/fvtt-nobunaga-black-castle/archive/refs/heads/main.zip"
+}

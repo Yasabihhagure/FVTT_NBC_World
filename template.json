@@ -1,0 +1,97 @@
+{
+    "Actor": {
+        "types": [
+            "character",
+            "npc"
+        ],
+        "templates": {
+            "base": {
+                "health": {
+                    "value": 10,
+                    "max": 10
+                },
+                "biography": ""
+            }
+        },
+        "character": {
+            "templates": [
+                "base"
+            ],
+            "attributes": {
+                "shin": {
+                    "value": 0,
+                    "label": "NBCASTLE.AbilityShin"
+                },
+                "gi": {
+                    "value": 0,
+                    "label": "NBCASTLE.AbilityGi"
+                },
+                "tai": {
+                    "value": 0,
+                    "label": "NBCASTLE.AbilityTai"
+                },
+                "taikyu": {
+                    "value": 0,
+                    "label": "NBCASTLE.AbilityTaikyu"
+                }
+            },
+            "details": {
+                "type": "simple",
+                "class": ""
+            },
+            "armor": {
+                "level": 0,
+                "label": ""
+            }
+        },
+        "npc": {
+            "templates": [
+                "base"
+            ],
+            "morale": {
+                "value": "",
+                "label": "NBCASTLE.Morale"
+            },
+            "armor": {
+                "level": 0,
+                "dice": "",
+                "reduction": "",
+                "label": ""
+            },
+            "cycle": {
+                "current": 1,
+                "attacks": []
+            }
+        }
+    },
+    "Item": {
+        "types": [
+            "weapon",
+            "armor",
+            "item",
+            "effect"
+        ],
+        "templates": {
+            "base": {
+                "description": ""
+            }
+        },
+        "weapon": {
+            "templates": [
+                "base"
+            ],
+            "damage": "1d6",
+            "range": "melee",
+            "ammo": -1,
+            "hitAbility": "tai",
+            "defenseAbility": "gi"
+        },
+        "armor": {
+            "templates": [
+                "base"
+            ],
+            "level": 0,
+            "reduction": ""
+        }
+    }
+}

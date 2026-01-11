@@ -1,0 +1,204 @@
+/* Global styles */
+.window-app {
+  font-family: "Signika", sans-serif;
+}
+
+/* Character Sheet */
+.actor.sheet form {
+  height: 100%;
+  overflow: hidden;
+}
+
+.actor.sheet .sheet-header {
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.actor.sheet .profile-img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin-right: 10px;
+  border: 1px solid #000;
+}
+
+.actor.sheet .header-fields {
+  flex: 1;
+}
+
+.actor.sheet h1.charname {
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.actor.sheet h1.charname input {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+  font-size: 24px;
+}
+
+.resource-label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+
+/* Grid Layouts */
+.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+/* Tabs */
+.sheet-tabs {
+  flex: 0 0 30px;
+  margin-bottom: 5px;
+  border-top: 1px solid #AAA;
+  border-bottom: 1px solid #AAA;
+}
+
+.sheet-tabs .item {
+  display: block;
+  float: left;
+  line-height: 30px;
+  padding: 0 10px;
+  border-right: 1px solid #AAA;
+  color: #4b4a44;
+  font-weight: bold;
+}
+
+.sheet-tabs .item.active {
+  color: #111;
+  text-shadow: 0 0 5px #FFF;
+  border-bottom: none;
+}
+
+/* Items List */
+.items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.items-list .item {
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px solid #BBB;
+}
+
+.items-list .item-header {
+  font-weight: bold;
+  background: #DDD;
+  padding: 5px;
+  border: 1px solid #000;
+}
+
+.items-list .item-image {
+  flex: 0 0 24px;
+  margin-right: 5px;
+}
+
+.items-list .item-name {
+  flex: 2;
+  margin: 0;
+}
+
+.items-list .item-controls {
+  flex: 0 0 50px;
+  text-align: right;
+}
+
+/* Compact Resource Inputs for NPC Sheet */
+.resource-inputs input {
+  flex: 0 0 50px;
+  text-align: center;
+}
+
+.resource-inputs span.sep {
+  flex: 0 0 10px;
+  text-align: center;
+}
+
+/* Active Attack Cycle Row */
+.active-cycle {
+  background-color: rgba(255, 0, 0, 0.2);
+  /* Red highlight */
+  font-weight: bold;
+  color: #FFF;
+}
+
+/* Better Input Readability */
+.nobunaga input[type="text"],
+.nobunaga input[type="number"],
+.nobunaga select {
+  color: #FFF;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+
+.nobunaga .resource-inputs input {
+  color: #FFF;
+  border: none;
+  /* Keep resource inputs clean */
+  border-bottom: 1px solid #777;
+}
+
+/* Morale Check Button */
+.morale-check {
+  flex: 0 0 30px;
+  text-align: center;
+  line-height: 24px;
+  cursor: pointer;
+  margin-left: 5px;
+  color: #FFF;
+}
+
+.morale-check:hover {
+  color: #FFD700;
+  text-shadow: 0 0 5px #FFD700;
+}
+
+/* Group Morale Check Button */
+.group-morale-check {
+  flex: 0 0 30px;
+  text-align: center;
+  line-height: 24px;
+  cursor: pointer;
+  margin-left: 5px;
+  color: #FFF;
+}
+
+.group-morale-check:hover {
+  color: #FF4444;
+  text-shadow: 0 0 5px #FF4444;
+}
