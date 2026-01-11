@@ -132,16 +132,21 @@ export class NobunagaActorSheet extends ActorSheet {
 
         // 1. Identify Group
         // Strategy: 
-        // Priority A: Same Folder (Allows mixed squads)
-        // Priority B: Name Matching (Fallback if no folder)
+        // Strict: Must be in a Folder.
 
         const folder = this.actor.folder;
-        let groupMethod = "Name";
-        if (folder) groupMethod = "Folder";
+        if (!folder) {
+            ui.notifications.warn(game.i18n.localize("NBCASTLE.ErrorNoFolder"));
+            // Need to add this key to lang files or use hardcoded string for now
+            console.warn("Nobunaga | Group Morale Check requires the Actor to be in a Folder.");
+            return;
+        }
 
-        // Assume group membership based on base name
+        const groupMethod = "Folder";
+
+        // Assume group membership based on base name (just for logging/display)
         const baseName = this.actor.name.replace(/[\s\d]+$/, "").trim();
-        console.log(`Nobunaga | Grouping Method: ${groupMethod} | Base Name: '${baseName}' | Folder: ${folder?.name} (${folder?.id})`);
+        console.log(`Nobunaga | Grouping Method: ${groupMethod} | Folder: ${folder.name} (${folder.id})`);
 
         // Find all tokens in current scene that match
         let scene = null;
@@ -177,32 +182,10 @@ export class NobunagaActorSheet extends ActorSheet {
             const actor = t.actor;
             if (!actor) return false;
 
-            // Folder Check
-            if (groupMethod === "Folder") {
-                // Check if target actor is in the same folder
-                const targetFolder = actor.folder;
-                // Note: Unlinked actors might inherit folder ID, check ID match
-                const match = targetFolder && (targetFolder.id === folder.id);
-                if (match) return true;
-                // If in folder mode, strictly require folder match? 
-                // User said "Search by members in same folder". 
-                // If I am in a folder, I should only care about folder mates.
-                return false;
-            }
-
-            // Name Fallback
-            const originalName = t.name;
-            const actorName = actor.name || "";
-            const tBaseName = originalName.replace(/[\s\d]+$/, "").trim();
-            const aBaseName = actorName.replace(/[\s\d]+$/, "").trim();
-
-            const match = tBaseName === baseName ||
-                originalName.startsWith(baseName) ||
-                aBaseName === baseName ||
-                actorName.startsWith(baseName);
-
-            console.log(`Nobunaga | Checking Token: '${originalName}' (Actor: '${actorName}') -> Base: '${tBaseName}'/'${aBaseName}' vs '${baseName}' [Match: ${match}]`);
-            return match;
+            // Folder Check (Strict)
+            // Check if target actor is in the same folder
+            const targetFolder = actor.folder;
+            return targetFolder && (targetFolder.id === folder.id);
         });
 
         console.log(`Nobunaga | Matched Tokens count: ${tokens.length}`);

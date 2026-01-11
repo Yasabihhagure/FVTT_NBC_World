@@ -7,6 +7,8 @@
     "NBCASTLE.AutoCreate": "Auto Create",
     "NBCASTLE.SelectEnemy": "Select Enemy Data",
     "NBCASTLE.Count": "Number",
+    "NBCASTLE.ErrorNoGroupMembers": "Details of the error.",
+    "NBCASTLE.ErrorNoFolder": "Group Morale Check requires the Actor to be in a Folder.",
     "NBCASTLE.MoraleCheck": "Morale Check",
     "NBCASTLE.MoraleCheckSuccess": "Success (Morale Maintained)",
     "NBCASTLE.MoraleCheckFailure": "Failure (Morale Broken)",

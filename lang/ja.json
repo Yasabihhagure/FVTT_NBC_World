@@ -34,5 +34,6 @@
     "NBCASTLE.ConditionHalfDefeated": "条件達成: 半数以上無力化",
     "NBCASTLE.ConditionSoloLowHP": "条件達成: 単騎かつHP1/3以下",
     "NBCASTLE.ConditionNotMet": "士気崩壊条件を満たしていません",
-    "NBCASTLE.ErrorNoGroupMembers": "グループのメンバーが見つかりません。名前の設定を確認してください。"
+    "NBCASTLE.ErrorNoGroupMembers": "グループのメンバーが見つかりません。名前の設定を確認してください。",
+    "NBCASTLE.ErrorNoFolder": "部隊士気チェックを行うには、アクターがフォルダに含まれている必要があります。"
 }
